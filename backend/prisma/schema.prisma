@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Teacher {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  exams     Exam[]
+}
+
+model Student {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+  sessions  Session[]
+}
+
+model Exam {
+  id               String     @id @default(uuid())
+  teacherId        String
+  teacher          Teacher    @relation(fields: [teacherId], references: [id])
+  title            String
+  subject          String
+  duration         Int
+  examKey          String     @unique
+  status           String     @default("draft")
+  shuffleQuestions Boolean    @default(false)
+  passingMarks     Int
+  startsAt         DateTime
+  endsAt           DateTime
+  createdAt        DateTime   @default(now())
+  questions        Question[]
+  sessions         Session[]
+}
+
+model Question {
+  id            String   @id @default(uuid())
+  examId        String
+  exam          Exam     @relation(fields: [examId], references: [id])
+  text          String
+  optionA       String
+  optionB       String
+  optionC       String
+  optionD       String
+  correctOption String
+  marks         Int
+  answers       Answer[]
+}
+
+model Session {
+  id          String   @id @default(uuid())
+  studentId   String
+  student     Student  @relation(fields: [studentId], references: [id])
+  examId      String
+  exam        Exam     @relation(fields: [examId], references: [id])
+  status      String   @default("ongoing")
+  startedAt   DateTime @default(now())
+  submittedAt DateTime?
+  answers     Answer[]
+  result      Result?
+}
+
+model Answer {
+  id             String   @id @default(uuid())
+  sessionId      String
+  session        Session  @relation(fields: [sessionId], references: [id])
+  questionId     String
+  question       Question @relation(fields: [questionId], references: [id])
+  selectedOption String?
+  savedAt        DateTime @default(now())
+}
+
+model Result {
+  id         String   @id @default(uuid())
+  sessionId  String   @unique
+  session    Session  @relation(fields: [sessionId], references: [id])
+  score      Int
+  total      Int
+  percentage Float
+  pass       Boolean
+  computedAt DateTime @default(now())
+}
