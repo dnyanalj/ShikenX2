@@ -17,6 +17,7 @@ model Teacher {
   name      String
   email     String   @unique
   password  String
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   exams     Exam[]
 }
@@ -26,8 +27,18 @@ model Student {
   name      String
   email     String    @unique
   password  String
+  isActive  Boolean   @default(true)
   createdAt DateTime  @default(now())
   sessions  Session[]
+}
+
+model Admin {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
 }
 
 model Exam {
