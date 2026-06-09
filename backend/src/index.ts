@@ -30,4 +30,3 @@ app.use(errorHandler);
 app.listen(env.port, () => {
   console.log(`ShikenX API running on http://localhost:${env.port}`);
 });
-    

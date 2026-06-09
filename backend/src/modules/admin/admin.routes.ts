@@ -8,7 +8,6 @@ import { paginationSchema } from "./admin.schema";
 const router = Router();
 
 router.use(authenticate, requireRole("admin"));
-
 router.get("/stats", adminController.getStats);
 router.get(
   "/teachers",

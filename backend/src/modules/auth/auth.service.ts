@@ -48,6 +48,7 @@ function buildAuthResponse(
 export async function registerTeacher(
   input: RegisterInput,
 ): Promise<AuthResponse> {
+  
   const email = input.email.toLowerCase();
 
   if (await isEmailTaken(email)) {
@@ -69,6 +70,7 @@ export async function registerTeacher(
 export async function registerStudent(
   input: RegisterInput,
 ): Promise<AuthResponse> {
+  
   const email = input.email.toLowerCase();
 
   if (await isEmailTaken(email)) {
@@ -156,7 +158,7 @@ export async function getMe(userId: string, role: Role): Promise<AuthUser> {
     }
     return toAuthUser(teacher, "teacher");
   }
-
+  
   if (role === "student") {
     const student = await prisma.student.findUnique({ where: { id: userId } });
     if (!student || !student.isActive) {

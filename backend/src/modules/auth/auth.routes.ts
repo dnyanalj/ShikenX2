@@ -11,6 +11,7 @@ router.post(
   validateBody(registerSchema),
   authController.registerTeacher,
 );
+
 router.post(
   "/teacher/login",
   validateBody(loginSchema),
@@ -22,6 +23,7 @@ router.post(
   validateBody(registerSchema),
   authController.registerStudent,
 );
+
 router.post(
   "/student/login",
   validateBody(loginSchema),
