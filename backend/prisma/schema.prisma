@@ -48,7 +48,7 @@ model Exam {
   title            String
   subject          String
   duration         Int
-  examKey          String     @unique
+  examKey          String?    @unique
   status           String     @default("draft")
   shuffleQuestions Boolean    @default(false)
   passingMarks     Int
