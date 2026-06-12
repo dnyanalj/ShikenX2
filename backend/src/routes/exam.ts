@@ -170,7 +170,7 @@ router.put(
   },
 );
 
-// POST /api/exam/:id/publish
+// POST /api/exam/:id/publish 
 router.post(
   "/:id/publish",
   async (req: Request, res: Response, next: NextFunction) => {

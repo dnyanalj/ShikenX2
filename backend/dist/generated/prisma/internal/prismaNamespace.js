@@ -168,7 +168,8 @@ exports.QuestionScalarFieldEnum = {
     optionC: 'optionC',
     optionD: 'optionD',
     correctOption: 'correctOption',
-    marks: 'marks'
+    marks: 'marks',
+    createdAt: 'createdAt'
 };
 exports.SessionScalarFieldEnum = {
     id: 'id',

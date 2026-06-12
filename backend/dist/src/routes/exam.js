@@ -145,7 +145,7 @@ router.put("/:id", (0, validate_1.validateBody)(updateExamSchema), async (req, r
         next(error);
     }
 });
-// POST /api/exam/:id/publish
+// POST /api/exam/:id/publish 
 router.post("/:id/publish", async (req, res, next) => {
     try {
         const teacherId = getTeacherId(req);
